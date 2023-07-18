@@ -1,6 +1,7 @@
-class ImaginaryNumber():
+class ImaginaryNumber:
     """
     A class used to represent an Imaginary Number.
+
     ...
     Attributes
     ----------
@@ -17,12 +18,14 @@ class ImaginaryNumber():
 
     def __init__(self, real=0.0, imaginary=0.0):
         """
+        Class constructor
+
         Parameters
         ----------
         real : float
-            the real component of the imaginary number
+            the real component of the imaginary number (default value = 0.0)
         imaginary : float
-            the imaginary component of the imaginary number
+            the imaginary component of the imaginary number (default value = 0.0)
         """
         self.real = real
         self.imaginary = imaginary
@@ -77,5 +80,4 @@ class ImaginaryNumber():
         if self.re == 0:
             return f'{self.imaginary:2f}i'
         if self.im < 0:
-            return f"{self.real:2f} - {self.imaginary:2f}i"
-
+            return f"{self.real:2f} {'-' if self.imaginary < 0 else '+'} {self.imaginary:2f}i"

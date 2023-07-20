@@ -29,8 +29,12 @@ class ImaginaryNumber:
         imaginary : float
             the imaginary component of the imaginary number (default value = 0.0)
         """
-        self.real = real
-        self.imaginary = imaginary
+
+        def filter_values_type(x):
+            return x if isinstance(x, (int, float)) and not isinstance(x, bool) else 0
+
+        self.real = filter_values_type(real)
+        self.imaginary = filter_values_type(imaginary)
 
     def add(self, to_add: object):
         """
@@ -99,9 +103,9 @@ class ImaginaryNumber:
             applied to, and to_multiply ImaginaryNumber object. The simplified equation would reduce to :
             (a+bi)(c+di) = (ac−bd)+(ad+bc)i.
         """
-        a, b = self.real, self.imaginary
-        c, d = to_multiply.real, to_multiply.imaginary
         if type(to_multiply) == ImaginaryNumber:
+            a, b = self.real, self.imaginary
+            c, d = to_multiply.real, to_multiply.imaginary
             return ImaginaryNumber(a * c - b * d, a * d + b * c)
         else:
             raise AttributeError(f"Wrong type of object passed to the substraction method.")
@@ -125,11 +129,11 @@ class ImaginaryNumber:
             applied to, and to_divide ImaginaryNumber object. The simplified equation would reduce to :
             (a + bi) / (c + di) = ((ac + bd) + (bc - ad) i) / c * c + d * d
         """
-        a, b = self.real, self.imaginary
-        c, d = to_divide.real, to_divide.imaginary
-        denominator = c ** 2 + d ** 2
 
         if type(to_divide) == ImaginaryNumber:
+            a, b = self.real, self.imaginary
+            c, d = to_divide.real, to_divide.imaginary
+            denominator = c ** 2 + d ** 2
             return ImaginaryNumber((a * c + b * d) / denominator, (b * c - a * d) / denominator)
         else:
             raise AttributeError(f"Wrong type of object passed to the substraction method.")
@@ -169,12 +173,21 @@ class ImaginaryNumber:
         return self.imaginary == 0
 
     def __str__(self):
-        if self.im == 0:
-            return f'{self.real:2f}'
-        if self.re == 0:
-            return f'{self.imaginary:2f}i'
-        if self.im < 0:
-            return f"{self.real:2f} {'-' if self.imaginary < 0 else '+'} {self.imaginary:2f}i"
+        """
+        Method designed to return a certain string when called or when the ImaginaryNumber object is printed.
+
+        Parameters
+        ----------
+        self : object
+            An instance of the ImaginaryNumbers class
+
+        Returns
+        -------
+        formatted string: str
+            A formatted string representing the imaginary number (e.g. 1 + 2i)
+        """
+
+        return f"{self.real:g} {'-' if self.imaginary < 0 else '+'} {self.imaginary:g}i"
 
     # TODO: A method used to check the equality between two ImaginaryNumbers objects
 

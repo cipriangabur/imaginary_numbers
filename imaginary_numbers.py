@@ -175,3 +175,11 @@ class ImaginaryNumber:
             return f'{self.imaginary:2f}i'
         if self.im < 0:
             return f"{self.real:2f} {'-' if self.imaginary < 0 else '+'} {self.imaginary:2f}i"
+
+    # TODO: A method used to check the equality between two ImaginaryNumbers objects
+
+    # TODO: A method to return the conjugate of a specific ImaginaryNumber object
+
+    # TODO: Method to calculate the square of a specific ImaginaryNumber object
+
+    # TODO: A method to plot a specific complex number in a 2D axes system

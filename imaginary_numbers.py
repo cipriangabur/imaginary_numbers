@@ -22,6 +22,8 @@ class ImaginaryNumber:
 
         Parameters
         ----------
+        self : object
+            An instance of the ImaginaryNumbers class
         real : float
             the real component of the imaginary number (default value = 0.0)
         imaginary : float
@@ -37,6 +39,8 @@ class ImaginaryNumber:
 
         Parameters
         ----------
+        self : object
+            An instance of the ImaginaryNumbers class
         to_add : object
             An ImaginaryNumber object that needs to be added to the initial ImaginaryNumber object.
 
@@ -59,6 +63,8 @@ class ImaginaryNumber:
 
         Parameters
         ----------
+        self : object
+            An instance of the ImaginaryNumbers class
         to_substract : object
             An ImaginaryNumber object that needs to be substracted from the initial ImaginaryNumber object.
 
@@ -73,6 +79,94 @@ class ImaginaryNumber:
             return ImaginaryNumber(self.real + to_substract.real, self.imaginary + to_substract.imaginary)
         else:
             raise AttributeError(f"Wrong type of object passed to the substraction method.")
+
+    def multiplication(self, to_multiply: object):
+        """
+        Multiply two imaginary numbers, one being the one that this method is applied to, and the other one being
+        to_multiply, both being ImaginaryNumbers objects.
+
+        Parameters
+        ----------
+        self : object
+            An instance of the ImaginaryNumbers class
+        to_multiply : object
+            An ImaginaryNumber object that needs to be multiplied with the initial ImaginaryNumber object.
+
+        Returns
+        -------
+        ImaginaryNumber object:
+            A new ImaginaryNumber object that will contain the multiplication between the object that this method is
+            applied to, and to_multiply ImaginaryNumber object. The simplified equation would reduce to :
+            (a+bi)(c+di) = (ac−bd)+(ad+bc)i.
+        """
+        a, b = self.real, self.imaginary
+        c, d = to_multiply.real, to_multiply.imaginary
+        if type(to_multiply) == ImaginaryNumber:
+            return ImaginaryNumber(a * c - b * d, a * d + b * c)
+        else:
+            raise AttributeError(f"Wrong type of object passed to the substraction method.")
+
+    def division(self, to_divide: object):
+        """
+        Divide two imaginary numbers, one being the one that this method is applied to, and the other one being
+        to_divide, both being ImaginaryNumbers objects.
+
+        Parameters
+        ----------
+        self : object
+            An instance of the ImaginaryNumbers class
+        to_divide : object
+            An ImaginaryNumber object that needs to be divided with the initial ImaginaryNumber object.
+
+        Returns
+        -------
+        ImaginaryNumber object:
+            A new ImaginaryNumber object that will contain the division between the object that this method is
+            applied to, and to_divide ImaginaryNumber object. The simplified equation would reduce to :
+            (a + bi) / (c + di) = ((ac + bd) + (bc - ad) i) / c * c + d * d
+        """
+        a, b = self.real, self.imaginary
+        c, d = to_divide.real, to_divide.imaginary
+        denominator = c ** 2 + d ** 2
+
+        if type(to_divide) == ImaginaryNumber:
+            return ImaginaryNumber((a * c + b * d) / denominator, (b * c - a * d) / denominator)
+        else:
+            raise AttributeError(f"Wrong type of object passed to the substraction method.")
+
+    def completely_imaginary(self):
+        """
+        Method designed to return True if a certain object is representing a pure imaginary number or False
+        otherwise
+
+        Parameters
+        ----------
+        self : object
+            An instance of the ImaginaryNumbers class
+
+        Returns
+        -------
+        bool:
+            True if the ImaginaryNumber has the real component equal to zero, False otherwise.
+        """
+        return self.real == 0
+
+    def completely_real(self):
+        """
+        Method designed to return True if a certain object is representing a pure real number or False
+        otherwise.
+
+        Parameters
+        ----------
+        self : object
+            An instance of the ImaginaryNumbers class
+
+        Returns
+        -------
+        bool:
+            True if the ImaginaryNumber has the imaginary component equal to zero, False otherwise.
+        """
+        return self.imaginary == 0
 
     def __str__(self):
         if self.im == 0:

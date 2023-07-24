@@ -5,6 +5,14 @@ from imaginary_numbers import ImaginaryNumber
 
 class ImaginaryNumberTests(unittest.TestCase):
 
+    data1 = [(1, 1), (1, -1), (-2, 2), (1.5, 3.2), (2, 2)]
+    data2 = [(2, 1), (2, 1), (4, 4), (1.2, -2.2), (0, 0)]
+
+    add_expected = ["3 + 2i", "3 + 0i", "2 + 6i", "2.7 + 1i", "2 + 2i"]
+    sub_expected = ["-1 + 0i", "-1 - 2i", "-6 - 2i", "0.3 + 5.4i", "2 + 2i"]
+    mul_expected = ["1 + 3i", "3 - 1i", "-16 + 0i", '8.84 + 0.54i', "0 + 0i"]
+    div_expected = ["0.6 + 0.2i", "0.2 - 0.6i", "0 + 0.5i", '-0.834395 + 1.13694i']
+
     def test_object_creation_valid_data_ints(self):
         self.assertEqual("1 + 2i", str(ImaginaryNumber(1, 2)))
 
@@ -52,16 +60,54 @@ class ImaginaryNumberTests(unittest.TestCase):
         self.assertEqual(obj.__str__(), str(obj))
 
     def test_addition_happy_flow(self):
-        data1 = [(1, 1), (1, -1), (-2, 2), (1.5, 3.2), (2, 2)]
-        data2 = [(2, 1), (2, 1), (4, 4), (1.2, -2.2), (0, 0)]
-        expected = ["3 + 2i", "3 + 0i", "2 + 6i", "2.7 + 1i", "2 + 2i"]
-        for index, _ in  enumerate(data1):
-            obj1 = ImaginaryNumber(*data1[index])
-            obj2 = ImaginaryNumber(*data2[index])
-            self.assertEqual(expected[index], obj1.add(obj2).__str__())
+        for index, _ in enumerate(self.data1):
+            obj1 = ImaginaryNumber(*self.data1[index])
+            obj2 = ImaginaryNumber(*self.data2[index])
+            self.assertEqual(self.add_expected[index], str(obj1 + obj2))
 
-    def test_addition_negative_test(self):
+    def test_substraction_happy_flow(self):
+        for index, _ in enumerate(self.data1):
+            obj1 = ImaginaryNumber(*self.data1[index])
+            obj2 = ImaginaryNumber(*self.data2[index])
+            self.assertEqual(self.sub_expected[index], str(obj1 - obj2))
+
+    def test_multiplication_happy_flow(self):
+        for index, _ in enumerate(self.data1):
+            obj1 = ImaginaryNumber(*self.data1[index])
+            obj2 = ImaginaryNumber(*self.data2[index])
+            self.assertEqual(self.mul_expected[index], str(obj1 * obj2))
+
+    def test_division_happy_flow(self):
+        for index, _ in enumerate(self.data1[:-1]):  # Otherwise will trigger ZeroDivisionError exception
+            obj1 = ImaginaryNumber(*self.data1[index])
+            obj2 = ImaginaryNumber(*self.data2[index])
+            self.assertEqual(self.div_expected[index], str(obj1 / obj2))
+
+    def test_addition_negative_test_1(self):
         obj1 = ImaginaryNumber()
         obj2 = "string object"
         with self.assertRaises(AttributeError):
-            obj1.add(obj2)
+            obj1.__add__(obj2)
+
+    def test_addition_negative_test_2(self):
+        obj1 = None
+        obj2 = "string object"
+        with self.assertRaises(AttributeError):
+            obj1.__add__(obj2)
+
+    def test_addition_negative_test_3(self):
+        obj1 = None
+        obj2 = ImaginaryNumber()
+        with self.assertRaises(AttributeError):
+            obj1.__add__(obj2)
+
+    # TODO: substraction negative tests
+
+    # TODO: multiplication negative tests for AttributeError
+
+    # TODO: Add addition/multiplication happy flows for testing addition/multiplication properties
+    #  (associativity, commutativity, etc).
+
+    # TODO: add division negative tests for AttributeError
+
+    # TODO: Add division negative tests for ZeroDivisionError

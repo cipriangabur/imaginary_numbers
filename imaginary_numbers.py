@@ -1,3 +1,5 @@
+import math
+
 class ImaginaryNumber:
     """
     A class used to represent an Imaginary Number.
@@ -36,31 +38,31 @@ class ImaginaryNumber:
         self.real = filter_values_type(real)
         self.imaginary = filter_values_type(imaginary)
 
-    def add(self, to_add: object):
+    def __add__(self, other):
         """
-        Adds two imaginary numbers, one being the one that this method is applied to, and the other one being to_add,
+        Adds two imaginary numbers, one being the one that this method is applied to, and the other object,
         both being ImaginaryNumbers objects.
 
         Parameters
         ----------
         self : object
             An instance of the ImaginaryNumbers class
-        to_add : object
+        other : object
             An ImaginaryNumber object that needs to be added to the initial ImaginaryNumber object.
 
         Returns
         -------
         ImaginaryNumber object:
             A new ImaginaryNumber object that will contain the sum between the real part of the applied object
-            with the real part of the to_add object, respectively the sum between the imaginary part of the
-            object that has this method applied and to_add imaginary part.
+            with the real part of the other object, respectively the sum between the imaginary part of the
+            object that has this method applied and other imaginary part.
         """
-        if type(to_add) == ImaginaryNumber:
-            return ImaginaryNumber(self.real + to_add.real, self.imaginary + to_add.imaginary)
+        if type(other) == ImaginaryNumber:
+            return ImaginaryNumber(self.real + other.real, self.imaginary + other.imaginary)
         else:
             raise AttributeError(f"Wrong type of object passed to the addition method.")
 
-    def substraction(self, to_substract: object):
+    def __sub__(self, to_substract: object):
         """
         Substracts two imaginary numbers, one being the one that this method is applied to, and the other one being
         to_substract, both being ImaginaryNumbers objects.
@@ -80,11 +82,11 @@ class ImaginaryNumber:
             the object that has this method applied and to_substract imaginary part.
         """
         if type(to_substract) == ImaginaryNumber:
-            return ImaginaryNumber(self.real + to_substract.real, self.imaginary + to_substract.imaginary)
+            return ImaginaryNumber(self.real - to_substract.real, self.imaginary - to_substract.imaginary)
         else:
             raise AttributeError(f"Wrong type of object passed to the substraction method.")
 
-    def multiplication(self, to_multiply: object):
+    def __mul__(self, to_multiply: object):
         """
         Multiply two imaginary numbers, one being the one that this method is applied to, and the other one being
         to_multiply, both being ImaginaryNumbers objects.
@@ -106,11 +108,11 @@ class ImaginaryNumber:
         if type(to_multiply) == ImaginaryNumber:
             a, b = self.real, self.imaginary
             c, d = to_multiply.real, to_multiply.imaginary
-            return ImaginaryNumber(a * c - b * d, a * d + b * c)
+            return ImaginaryNumber(a * c - b * d, b * c + a * d)
         else:
             raise AttributeError(f"Wrong type of object passed to the substraction method.")
 
-    def division(self, to_divide: object):
+    def __truediv__(self, to_divide: object):
         """
         Divide two imaginary numbers, one being the one that this method is applied to, and the other one being
         to_divide, both being ImaginaryNumbers objects.
@@ -187,12 +189,16 @@ class ImaginaryNumber:
             A formatted string representing the imaginary number (e.g. 1 + 2i)
         """
 
-        return f"{self.real:g} {'-' if self.imaginary < 0 else '+'} {self.imaginary:g}i"
+        return f"{self.real:g} {'-' if self.imaginary < 0 else '+'} {abs(self.imaginary):g}i"
+
+    # TODO: A method that has the purpose of calculating the modulus of an imaginary number
+    #  (sqrt(real**2 + imaginary**2) )
 
     # TODO: A method used to check the equality between two ImaginaryNumbers objects
 
     # TODO: A method to return the conjugate of a specific ImaginaryNumber object
+    #  (for z = a + bj, the conjugate would be z1 = a - bj)
 
-    # TODO: Method to calculate the square of a specific ImaginaryNumber object
+    # TODO: Method to calculate the square root of a specific ImaginaryNumber object
 
     # TODO: A method to plot a specific complex number in a 2D axes system

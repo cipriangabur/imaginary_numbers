@@ -1,6 +1,8 @@
 # imaginary_numbers
 A python based class that has the purpose of implementing a version of class that can support Imaginary Numbers different operations (abstracting the fact that python supports imaginary numbers natively). The ImaginaryNumber class is found in  imaginary_numbers.py file and there are some unittests done for the methods of the specified class in file imaginary_numbers_test.py.
 
+Also, using Github Actions, at every push there are executed the unittests specified above. 
+
 ## Requirements
 
 | Tool   | Version                  | Link                                                 |

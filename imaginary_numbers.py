@@ -1,5 +1,3 @@
-import math
-
 class ImaginaryNumber:
     """
     A class used to represent an Imaginary Number.
@@ -62,29 +60,29 @@ class ImaginaryNumber:
         else:
             raise AttributeError(f"Wrong type of object passed to the addition method.")
 
-    def __sub__(self, to_substract: object):
+    def __sub__(self, to_subtract: object):
         """
-        Substracts two imaginary numbers, one being the one that this method is applied to, and the other one being
-        to_substract, both being ImaginaryNumbers objects.
+        Subtracts two imaginary numbers, one being the one that this method is applied to, and the other one being
+        to_subtract, both being ImaginaryNumbers objects.
 
         Parameters
         ----------
         self : object
             An instance of the ImaginaryNumbers class
-        to_substract : object
-            An ImaginaryNumber object that needs to be substracted from the initial ImaginaryNumber object.
+        to_subtract : object
+            An ImaginaryNumber object that needs to be subtracted from the initial ImaginaryNumber object.
 
         Returns
         -------
         ImaginaryNumber object:
             A new ImaginaryNumber object that will contain the difference between the real part of the applied object
-            with the real part of the to_substract object, respectively the difference between the imaginary part of
-            the object that has this method applied and to_substract imaginary part.
+            with the real part of the to_subtract object, respectively the difference between the imaginary part of
+            the object that has this method applied and to_subtract imaginary part.
         """
-        if type(to_substract) == ImaginaryNumber:
-            return ImaginaryNumber(self.real - to_substract.real, self.imaginary - to_substract.imaginary)
+        if type(to_subtract) == ImaginaryNumber:
+            return ImaginaryNumber(self.real - to_subtract.real, self.imaginary - to_subtract.imaginary)
         else:
-            raise AttributeError(f"Wrong type of object passed to the substraction method.")
+            raise AttributeError(f"Wrong type of object passed to the subtraction method.")
 
     def __mul__(self, to_multiply: object):
         """
@@ -110,7 +108,7 @@ class ImaginaryNumber:
             c, d = to_multiply.real, to_multiply.imaginary
             return ImaginaryNumber(a * c - b * d, b * c + a * d)
         else:
-            raise AttributeError(f"Wrong type of object passed to the substraction method.")
+            raise AttributeError(f"Wrong type of object passed to the multiplication method.")
 
     def __truediv__(self, to_divide: object):
         """
@@ -138,7 +136,7 @@ class ImaginaryNumber:
             denominator = c ** 2 + d ** 2
             return ImaginaryNumber((a * c + b * d) / denominator, (b * c - a * d) / denominator)
         else:
-            raise AttributeError(f"Wrong type of object passed to the substraction method.")
+            raise AttributeError(f"Wrong type of object passed to the division method.")
 
     def completely_imaginary(self):
         """

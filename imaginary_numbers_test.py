@@ -65,7 +65,7 @@ class ImaginaryNumberTests(unittest.TestCase):
             obj2 = ImaginaryNumber(*self.data2[index])
             self.assertEqual(self.add_expected[index], str(obj1 + obj2))
 
-    def test_substraction_happy_flow(self):
+    def test_subtraction_happy_flow(self):
         for index, _ in enumerate(self.data1):
             obj1 = ImaginaryNumber(*self.data1[index])
             obj2 = ImaginaryNumber(*self.data2[index])
@@ -101,7 +101,7 @@ class ImaginaryNumberTests(unittest.TestCase):
         with self.assertRaises(AttributeError):
             obj1.__add__(obj2)
 
-    # TODO: substraction negative tests
+    # TODO: subtraction negative tests
 
     # TODO: multiplication negative tests for AttributeError
 
